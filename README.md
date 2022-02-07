@@ -1,2 +1,2 @@
 # nvc-takehome
-Newton vision corportation take home assignment.
+Newton Vision Corporation - Take Home Assignment.
