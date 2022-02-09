@@ -1,15 +1,15 @@
 package com.nvc.backendtest.service;
 
 import com.nvc.backendtest.dataaccess.UserRepository;
-import com.nvc.backendtest.model.exceptions.UserAlreadyExistsException;
-import com.nvc.backendtest.model.exceptions.UserNotFoundException;
+import com.nvc.backendtest.exceptions.UserAlreadyExistsException;
+import com.nvc.backendtest.exceptions.UserNotFoundException;
 import com.nvc.backendtest.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-import static com.nvc.backendtest.model.exceptions.ErrorMessages.USER_ALREADY_EXISTS;
-import static com.nvc.backendtest.model.exceptions.ErrorMessages.USER_NOT_FOUND;
+import static com.nvc.backendtest.util.Messages.USER_ALREADY_EXISTS_ERROR;
+import static com.nvc.backendtest.util.Messages.USER_NOT_FOUND_ERROR;
 
 public class UserServiceImpl implements UserService {
 
@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
         if (email != null && !email.isEmpty()) {
             userList = userRepository.findByEmail(email);
             if (userList == null || userList.isEmpty()) {
-                throw new UserNotFoundException(USER_NOT_FOUND);
+                throw new UserNotFoundException(USER_NOT_FOUND_ERROR);
             }
         } else {
             userList = userRepository.findAll();
@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
         if (existingUsers == null || existingUsers.isEmpty()){
             user = userRepository.save(user);
         } else {
-            throw new UserAlreadyExistsException(USER_ALREADY_EXISTS, user.getEmail());
+            throw new UserAlreadyExistsException(USER_ALREADY_EXISTS_ERROR, user.getEmail());
         }
 
         return user;

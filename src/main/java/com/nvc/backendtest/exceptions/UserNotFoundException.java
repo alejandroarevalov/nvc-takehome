@@ -1,4 +1,4 @@
-package com.nvc.backendtest.model.exceptions;
+package com.nvc.backendtest.exceptions;
 
 public class UserNotFoundException extends RuntimeException {
 
